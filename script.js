@@ -4,18 +4,16 @@ const canvas = document.getElementById("cursor-canvas");
 const ctx = canvas.getContext("2d");
 let W = (canvas.width = window.innerWidth);
 let H = (canvas.height = window.innerHeight);
+
 window.addEventListener("resize", () => {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
 });
 
-let mouseX = W / 2,
-  mouseY = H / 2;
+let mouseX = W / 2, mouseY = H / 2;
 let particles = [];
 
-const reduceMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)",
-).matches;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 window.addEventListener("mousemove", (e) => {
   mouseX = e.clientX;
@@ -39,14 +37,8 @@ window.addEventListener("mousemove", (e) => {
   if (particles.length > 160) particles.splice(0, particles.length - 160);
 });
 
-window.addEventListener(
-  "mousedown",
-  () => (dot.style.transform = "translate(-50%,-50%) scale(0.7)"),
-);
-window.addEventListener(
-  "mouseup",
-  () => (dot.style.transform = "translate(-50%,-50%) scale(1)"),
-);
+window.addEventListener("mousedown", () => dot.style.transform = "translate(-50%,-50%) scale(0.7)");
+window.addEventListener("mouseup", () => dot.style.transform = "translate(-50%,-50%) scale(1)");
 
 function animateParticles() {
   ctx.clearRect(0, 0, W, H);
@@ -64,7 +56,7 @@ function animateParticles() {
 }
 animateParticles();
 
-// hover state for interactive elements
+// Hover states
 const hoverables = "button, a, .corner, .toc-item";
 document.addEventListener("mouseover", (e) => {
   if (e.target.closest(hoverables)) dot.classList.add("hover");
@@ -84,8 +76,8 @@ const staticRight = document.getElementById("staticRight");
 const cornerNext = document.getElementById("cornerNext");
 const cornerPrev = document.getElementById("cornerPrev");
 
-const NUM_LEAVES = 4; // leaf i: front = r{i}, back = l{i+1}
-let currentSpread = 0; // 0..NUM_LEAVES  (0 = cover spread showing l0/r0)
+const NUM_LEAVES = 4;
+let currentSpread = 0;
 
 function getTpl(id) {
   const t = document.getElementById("tpl-" + id);
@@ -97,7 +89,7 @@ function fillSlot(el, id) {
   el.appendChild(getTpl(id));
 }
 
-// initialize all leaf faces
+// Initialize leaves
 const leaves = [];
 for (let i = 0; i < NUM_LEAVES; i++) {
   const leafEl = document.getElementById("leaf" + i);
@@ -108,7 +100,7 @@ for (let i = 0; i < NUM_LEAVES; i++) {
   leaves.push(leafEl);
 }
 fillSlot(staticLeft, "l0");
-fillSlot(staticRight, "r0"); // will be hidden once leaf0 sits on top, but kept as fallback
+fillSlot(staticRight, "r0");
 
 function renderSpread() {
   for (let i = 0; i < NUM_LEAVES; i++) {
@@ -131,21 +123,11 @@ function goPrev() {
   }
 }
 
-// page index mapping for nav (logical page 0..7 -> spread)
-// page 0 = contents (spread0 right), 1=about(spread0 left after turn / spread1 left)...
-// Simplify: spread N shows left = l{N}, right = r{N}
 const pageMap = {
-  0: 0, // contents -> spread 0 (right = r0 = contents)
-  1: 1, // about -> spread 1 left = l1
-  2: 1,
-  3: 2, // projects -> spread2 left = l2
-  4: 2,
-  5: 3, // skills -> spread3 left = l3
-  6: 3,
-  7: 4, // contact -> spread4 left = l4
+  0: 0, 1: 1, 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4
 };
 
-document.querySelectorAll(".nav-link").forEach((btn) => {
+document.querySelectorAll(".nav-link").forEach(btn => {
   btn.addEventListener("click", () => {
     const target = pageMap[btn.dataset.page] ?? 0;
     currentSpread = target;
@@ -153,7 +135,8 @@ document.querySelectorAll(".nav-link").forEach((btn) => {
     updateActiveNav(btn);
   });
 });
-document.querySelectorAll(".toc-item").forEach((item) => {
+
+document.querySelectorAll(".toc-item").forEach(item => {
   item.addEventListener("click", () => {
     const target = pageMap[item.dataset.goto] ?? 0;
     currentSpread = target;
@@ -162,16 +145,13 @@ document.querySelectorAll(".toc-item").forEach((item) => {
 });
 
 function updateActiveNav(activeBtn) {
-  document
-    .querySelectorAll(".nav-link")
-    .forEach((b) => b.classList.remove("active"));
+  document.querySelectorAll(".nav-link").forEach(b => b.classList.remove("active"));
   if (activeBtn) activeBtn.classList.add("active");
 }
 
 cornerNext.addEventListener("click", goNext);
 cornerPrev.addEventListener("click", goPrev);
 
-// keyboard navigation
 window.addEventListener("keydown", (e) => {
   if (!bookOpenWrap.classList.contains("show")) return;
   if (e.key === "ArrowRight") goNext();
@@ -187,6 +167,7 @@ function openBook() {
   currentSpread = 0;
   renderSpread();
 }
+
 function closeBook() {
   bookOpenWrap.classList.remove("show");
   nav.classList.remove("show");
