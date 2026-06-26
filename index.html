@@ -10,14 +10,20 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="bg-glow"></div>
+    <head>
+ <body>
+    <canvas id="grid-canvas"></canvas>
     <canvas id="cursor-canvas"></canvas>
     <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="bg-glow"></div>
 
+    <!-- NAV -->
     <nav class="nav" id="nav">
-      <div class="nav-brand">Jasman Kaur</div>
+      <div class="nav-brand">
+        <span class="nav-brand-dot"></span>
+        Jasman Kaur
+      </div>
       <div class="nav-links">
         <button class="nav-link" data-page="0">Contents</button>
         <button class="nav-link" data-page="1">About</button>
@@ -28,129 +34,58 @@
     </nav>
 
     <div class="scene">
-      <!-- HERO / CLOSED BOOK -->
+      <!-- HERO -->
       <div class="hero" id="hero">
         <div class="hero-bg-text">JASMAN&nbsp;&nbsp;KAUR</div>
-
         <div class="hero-side-note">
-          <span class="rule"></span>A notebook, of code &amp; craft.
+          <span class="rule"></span>A notebook of<br/>code &amp; craft.
         </div>
-        <div class="hero-corner-note">...looking to collaborate with like minded individulas</div>
-
-        <div class="hero-eyebrow">
-          B.Tech Computer Engineering · Thapar Institute
-        </div>
+        <div class="hero-corner-note">...looking to collaborate<br/>with like-minded individuals.</div>
+        <div class="hero-eyebrow">B.Tech Computer Engineering · Thapar Institute</div>
 
         <div class="book-wrap">
           <div class="book-closed" id="bookClosed">
             <div class="book-stack">
               <div class="book-pages-edge"></div>
               <div class="book-cover-art">
-                <svg
-                  class="book-cover-illustration"
-                  viewBox="0 0 300 410"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                >
+                <svg class="book-cover-illustration" viewBox="0 0 300 410" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                   <defs>
                     <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#2A3A5C" />
-                      <stop offset="100%" stop-color="#1B2440" />
+                      <stop offset="0%" stop-color="#2A3A5C"/>
+                      <stop offset="100%" stop-color="#1B2440"/>
                     </linearGradient>
+                    <radialGradient id="glow1" cx="50%" cy="40%" r="60%">
+                      <stop offset="0%" stop-color="#8458b3" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+                    </radialGradient>
                   </defs>
-                  <rect width="300" height="410" fill="url(#g1)" />
-                  <!-- (SVG content unchanged) -->
-                  <circle
-                    cx="40"
-                    cy="50"
-                    r="34"
-                    fill="none"
-                    stroke="#A0D2EB"
-                    stroke-width="1.4"
-                    opacity="0.55"
-                  />
-                  <circle
-                    cx="40"
-                    cy="50"
-                    r="20"
-                    fill="none"
-                    stroke="#A0D2EB"
-                    stroke-width="1"
-                    opacity="0.4"
-                  />
-                  <rect
-                    x="190"
-                    y="20"
-                    width="80"
-                    height="80"
-                    rx="8"
-                    fill="none"
-                    stroke="#D0BDF4"
-                    stroke-width="1.4"
-                    opacity="0.5"
-                    transform="rotate(18 230 60)"
-                  />
-                  <path
-                    d="M30 150 L60 130 L90 150 L90 190 L60 210 L30 190 Z"
-                    fill="none"
-                    stroke="#A0D2EB"
-                    stroke-width="1.2"
-                    opacity="0.45"
-                  />
-                  <path
-                    d="M30 150 L60 130 L90 150"
-                    fill="none"
-                    stroke="#A0D2EB"
-                    stroke-width="1.2"
-                    opacity="0.45"
-                  />
-                  <line
-                    x1="60"
-                    y1="130"
-                    x2="60"
-                    y2="210"
-                    stroke="#A0D2EB"
-                    stroke-width="0.8"
-                    opacity="0.3"
-                  />
-                  <text
-                    x="150"
-                    y="180"
-                    font-family="JetBrains Mono, monospace"
-                    font-size="11"
-                    fill="#D0BDF4"
-                    opacity="0.55"
-                  >
-                    <!-- &lt;build/&gt; -->
-                  </text>
-                  <text
-                    x="150"
-                    y="200"
-                    font-family="JetBrains Mono, monospace"
-                    font-size="11"
-                    fill="#A0D2EB"
-                    opacity="0.4"
-                  >
-                    <!-- while(true){ ship() } -->
-                     hello world
-                  </text>
-                  <text
-                    x="150"
-                    y="220"
-                    font-family="JetBrains Mono, monospace"
-                    font-size="11"
-                    fill="#D0BDF4"
-                    opacity="0.5"
-                  >
-                    <!-- model.fit(X, y) -->
-                  </text>
-                  <!-- ... rest of SVG remains the same ... -->
+                  <rect width="300" height="410" fill="url(#g1)"/>
+                  <rect width="300" height="410" fill="url(#glow1)"/>
+                  <!-- decorative circles -->
+                  <circle cx="40" cy="50" r="34" fill="none" stroke="#A0D2EB" stroke-width="1.4" opacity="0.5"/>
+                  <circle cx="40" cy="50" r="20" fill="none" stroke="#A0D2EB" stroke-width="1" opacity="0.35"/>
+                  <circle cx="260" cy="380" r="50" fill="none" stroke="#D0BDF4" stroke-width="1" opacity="0.3"/>
+                  <!-- rotated square -->
+                  <rect x="190" y="20" width="80" height="80" rx="8" fill="none" stroke="#D0BDF4" stroke-width="1.4" opacity="0.45" transform="rotate(18 230 60)"/>
+                  <!-- hexagon -->
+                  <path d="M30 150 L60 130 L90 150 L90 190 L60 210 L30 190 Z" fill="none" stroke="#A0D2EB" stroke-width="1.2" opacity="0.4"/>
+                  <path d="M30 150 L60 130 L90 150" fill="none" stroke="#A0D2EB" stroke-width="1.2" opacity="0.4"/>
+                  <line x1="60" y1="130" x2="60" y2="210" stroke="#A0D2EB" stroke-width="0.8" opacity="0.25"/>
+                  <!-- monospace text -->
+                  <text x="110" y="300" font-family="monospace" font-size="10" fill="#A0D2EB" opacity="0.35">hello world</text>
+                  <text x="110" y="318" font-family="monospace" font-size="10" fill="#D0BDF4" opacity="0.3">while(true){ship()}</text>
+                  <!-- grid dots -->
+                  <g opacity="0.15" fill="#A0D2EB">
+                    <circle cx="150" cy="80" r="1.5"/><circle cx="170" cy="80" r="1.5"/><circle cx="190" cy="80" r="1.5"/>
+                    <circle cx="150" cy="100" r="1.5"/><circle cx="170" cy="100" r="1.5"/><circle cx="190" cy="100" r="1.5"/>
+                    <circle cx="150" cy="120" r="1.5"/><circle cx="170" cy="120" r="1.5"/><circle cx="190" cy="120" r="1.5"/>
+                  </g>
                 </svg>
                 <div class="book-cover-veil"></div>
                 <div class="book-cover-content">
                   <div class="book-cover-emblem">JK</div>
                   <div class="book-cover-mono">Portfolio Website</div>
-                  <div class="book-cover-name">Jasman<br />Kaur</div>
+                  <div class="book-cover-name">Jasman<br/>Kaur</div>
                   <div class="book-cover-role">Software · ML · Frontend</div>
                 </div>
               </div>
@@ -163,10 +98,6 @@
           <div class="hero-year">2023</div>
           <div class="hero-year">2027</div>
         </div>
-
-        <!-- <div class="hero-click-row">
-          <div class="click-hint">click the book to open</div>
-        </div> -->
       </div>
 
       <!-- OPEN BOOK -->
@@ -174,74 +105,60 @@
         <div class="book" id="book">
           <button class="book-close" id="bookClose">close book ✕</button>
 
+          <!-- Progress bar -->
+          <div class="page-progress">
+            <div class="page-progress-fill" id="progressFill" style="width:0%"></div>
+          </div>
+
           <div class="book-base">
-            <div class="page-static left" id="staticLeft"></div>
+            <div class="page-static left"  id="staticLeft"></div>
             <div class="page-static right" id="staticRight"></div>
           </div>
 
-          <div class="leaf" id="leaf0" style="z-index: 17">
+          <div class="leaf" id="leaf0" style="z-index:17">
             <div class="leaf-face leaf-front" data-slot="r0"></div>
-            <div class="leaf-face leaf-back" data-slot="l1"></div>
+            <div class="leaf-face leaf-back"  data-slot="l1"></div>
           </div>
-          <div class="leaf" id="leaf1" style="z-index: 16">
+          <div class="leaf" id="leaf1" style="z-index:16">
             <div class="leaf-face leaf-front" data-slot="r1"></div>
-            <div class="leaf-face leaf-back" data-slot="l2"></div>
+            <div class="leaf-face leaf-back"  data-slot="l2"></div>
           </div>
-          <div class="leaf" id="leaf2" style="z-index: 15">
+          <div class="leaf" id="leaf2" style="z-index:15">
             <div class="leaf-face leaf-front" data-slot="r2"></div>
-            <div class="leaf-face leaf-back" data-slot="l3"></div>
+            <div class="leaf-face leaf-back"  data-slot="l3"></div>
           </div>
-          <div class="leaf" id="leaf3" style="z-index: 14">
+          <div class="leaf" id="leaf3" style="z-index:14">
             <div class="leaf-face leaf-front" data-slot="r3"></div>
-            <div class="leaf-face leaf-back" data-slot="l4"></div>
+            <div class="leaf-face leaf-back"  data-slot="l4"></div>
           </div>
 
           <div class="corner prev" id="cornerPrev">
             <div class="corner-fold"></div>
+            <span class="corner-label">← prev</span>
           </div>
           <div class="corner next" id="cornerNext">
             <div class="corner-fold"></div>
+            <span class="corner-label">next →</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ===================== PAGE CONTENT TEMPLATES ===================== -->
+    <!-- ===== PAGE TEMPLATES ===== -->
     <template id="tpl-l0"><div class="page-content"></div></template>
 
     <template id="tpl-r0">
       <div class="page-content">
         <div class="page-tag">001 — Contents</div>
-        <div class="page-h">Table of<br />Contents</div>
+        <div class="page-h">Table of<br/>Contents</div>
         <div class="toc-list">
-          <div class="toc-item" data-goto="1">
-            <span>About Me</span><span class="dots"></span
-            ><span class="num">II</span>
-          </div>
-          <div class="toc-item" data-goto="2">
-            <span>Currently</span><span class="dots"></span
-            ><span class="num">III</span>
-          </div>
-          <div class="toc-item" data-goto="3">
-            <span>Featured Projects</span><span class="dots"></span
-            ><span class="num">IV</span>
-          </div>
-          <div class="toc-item" data-goto="4">
-            <span>Project Notes</span><span class="dots"></span
-            ><span class="num">V</span>
-          </div>
-          <div class="toc-item" data-goto="5">
-            <span>Technical Skills</span><span class="dots"></span
-            ><span class="num">VI</span>
-          </div>
-          <div class="toc-item" data-goto="6">
-            <span>Tools &amp; Stack</span><span class="dots"></span
-            ><span class="num">VII</span>
-          </div>
-          <div class="toc-item" data-goto="7">
-            <span>Get in Touch</span><span class="dots"></span
-            ><span class="num">VIII</span>
-          </div>
+          <div class="toc-item" data-goto="1" style="--i:0"><span>About Me</span><span class="dots"></span><span class="num">II</span></div>
+          <div class="toc-item" data-goto="2" style="--i:1"><span>Currently</span><span class="dots"></span><span class="num">III</span></div>
+          <div class="toc-item" data-goto="3" style="--i:2"><span>Featured Projects</span><span class="dots"></span><span class="num">IV</span></div>
+          <div class="toc-item" data-goto="4" style="--i:3"><span>Project Notes</span><span class="dots"></span><span class="num">V</span></div>
+          <div class="toc-item" data-goto="5" style="--i:4"><span>Technical Skills</span><span class="dots"></span><span class="num">VI</span></div>
+          <div class="toc-item" data-goto="6" style="--i:5"><span>Tools &amp; Stack</span><span class="dots"></span><span class="num">VII</span></div>
+          <div class="toc-item" data-goto="7" style="--i:6"><span>Get in Touch</span><span class="dots"></span><span class="num">VIII</span></div>
         </div>
         <div class="page-num r">I</div>
       </div>
@@ -251,38 +168,65 @@
       <div class="page-content">
         <div class="about-portrait">JK</div>
         <div class="page-tag">About</div>
-        <div class="page-h">Hi, I'm<br />Jasman.</div>
+        <div class="page-h">Hi, I'm<br/>Jasman.</div>
         <p class="page-text">
-          I'm a <strong>B.Tech Computer Engineering</strong> student at Thapar
-          Institute of Engineering &amp; Technology (2023–27), building
-          predictive ML models, real-time telemetry pipelines, and scalable
-          backends.
+          I'm a <strong>B.Tech Computer Engineering</strong> student at Thapar Institute of Engineering &amp; Technology (2023–27), building predictive ML models, real-time telemetry pipelines, and scalable backends.
         </p>
         <p class="page-text">
-          I move comfortably between full-stack, edge AI, and robotics, wherever low-latency meets high impact.
+          I move comfortably between full-stack, edge AI, and robotics — wherever low-latency meets high impact.
         </p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Projects shipped</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">97.5%</span>
+            <span class="stat-label">NLP accuracy</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Deployments</span>
+          </div>
+        </div>
         <div class="page-num l">II</div>
       </div>
     </template>
+
     <template id="tpl-r1">
       <div class="page-content">
         <div class="page-tag">Currently</div>
-        <div class="page-h">What I'm<br />up to.</div>
-        <p class="page-text">
-          <strong>SDE Intern @ VYTL</strong> — building an intranet Visitor
-          Management System in production (PHP, MySQL, JS).
-        </p>
-        <p class="page-text">
-          <strong>Learning:</strong> Cloud (AWS/Azure), Node.js, React.
-        </p>
-        <p class="page-text">
-          <strong>Open to collaborate on:</strong> ML projects, full-stack apps,
-          open-source tools.
-        </p>
-        <p class="page-text">
-          <strong>Ask me about:</strong> NLP, system design, SRS writing,
-          breaking into consulting-tech.
-        </p>
+        <div class="page-h">What I'm<br/>up to.</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot active"></div><div class="tl-dot-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">SDE Intern @ VYTL</div>
+              <div class="tl-sub">Building an intranet Visitor Management System in production — PHP, MySQL, JS.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-dot-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Learning</div>
+              <div class="tl-sub">Cloud (AWS / Azure), Node.js, React — going deep on system design.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-dot-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Open to collaborate on</div>
+              <div class="tl-sub">ML projects, full-stack apps, open-source tools.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Ask me about</div>
+              <div class="tl-sub">NLP, system design, SRS writing, breaking into consulting-tech.</div>
+            </div>
+          </div>
+        </div>
         <div class="page-num r">III</div>
       </div>
     </template>
@@ -290,44 +234,34 @@
     <template id="tpl-l2">
       <div class="page-content">
         <div class="page-tag">Projects</div>
-        <div class="page-h">Featured<br />Work.</div>
-        <div class="project-card">
+        <div class="page-h">Featured<br/>Work.</div>
+        <div class="project-card" style="--i:0">
           <div class="project-name">VYTL VMS</div>
           <div class="project-stack">PHP · MYSQL · JS</div>
-          <div class="project-desc">
-            Enterprise Visitor Management System for the Vardhaman Textiles
-            intranet, and learning ERP software, currently in progress.
-          </div>
+          <div class="project-desc">Enterprise Visitor Management System for the Vardhaman Textiles intranet — production ERP software, currently in progress.</div>
         </div>
-        <div class="project-card">
+        <div class="project-card" style="--i:1">
           <div class="project-name">Fake Job Posting Detection</div>
           <div class="project-stack">PYTHON · NLP · FLASK</div>
-          <div class="project-desc">
-            An NLP classifier flagging fraudulent job listings at 97.5%
-            accuracy.
-          </div>
+          <div class="project-desc">An NLP classifier flagging fraudulent job listings at <strong>97.5% accuracy</strong>. Built with text feature engineering and ensemble methods.</div>
         </div>
         <div class="page-num l">IV</div>
       </div>
     </template>
+
     <template id="tpl-r2">
       <div class="page-content">
         <div class="page-tag">Projects, cont.</div>
-        <div class="page-h">More<br />Builds.</div>
-        <div class="project-card">
+        <div class="page-h">More<br/>Builds.</div>
+        <div class="project-card" style="--i:0">
           <div class="project-name">Ridezon</div>
           <div class="project-stack">TYPESCRIPT · IEEE SRS</div>
-          <div class="project-desc">
-            A student ride-sharing platform, designed start-to-finish with a
-            full IEEE Software Requirements Specification.
-          </div>
+          <div class="project-desc">A student ride-sharing platform, designed start-to-finish with a full IEEE Software Requirements Specification.</div>
         </div>
-        <div class="project-card">
+        <div class="project-card" style="--i:1">
           <div class="project-name">Virsa Society Website</div>
           <div class="project-stack">NEXT.JS · TYPESCRIPT · TAILWIND</div>
-          <div class="project-desc">
-            A production site shipped with 50+ deployments.
-          </div>
+          <div class="project-desc">A production site for the Virsa cultural society — shipped with 50+ deployments, live on campus.</div>
         </div>
         <div class="page-num r">V</div>
       </div>
@@ -336,45 +270,46 @@
     <template id="tpl-l3">
       <div class="page-content">
         <div class="page-tag">Skills</div>
-        <div class="page-h">AI &amp;<br />Machine Learning</div>
+        <div class="page-h">AI &amp;<br/>Machine Learning</div>
         <div class="skill-row">
-          <span class="skill-chip">Python</span
-          ><span class="skill-chip">TensorFlow</span>
-          <span class="skill-chip">PyTorch</span
-          ><span class="skill-chip">Keras</span>
-          <span class="skill-chip">scikit-learn</span
-          ><span class="skill-chip">OpenCV</span>
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">TensorFlow</span>
+          <span class="skill-chip">PyTorch</span>
+          <span class="skill-chip">Keras</span>
+          <span class="skill-chip">scikit-learn</span>
+          <span class="skill-chip">OpenCV</span>
         </div>
         <div class="skill-group-label">Data &amp; Analytics</div>
         <div class="skill-row">
-          <span class="skill-chip">MySQL</span
-          ><span class="skill-chip">Pandas</span>
-          <span class="skill-chip">NumPy</span
-          ><span class="skill-chip">Matplotlib</span>
+          <span class="skill-chip">MySQL</span>
+          <span class="skill-chip">Pandas</span>
+          <span class="skill-chip">NumPy</span>
+          <span class="skill-chip">Matplotlib</span>
           <span class="skill-chip">Power BI</span>
         </div>
         <div class="page-num l">VI</div>
       </div>
     </template>
+
     <template id="tpl-r3">
       <div class="page-content">
         <div class="page-tag">Skills, cont.</div>
-        <div class="page-h">Software &amp;<br />Embedded</div>
+        <div class="page-h">Software &amp;<br/>Embedded</div>
         <div class="skill-group-label">SDE / Full Stack</div>
         <div class="skill-row">
-          <span class="skill-chip">C / C++</span
-          ><span class="skill-chip">JavaScript</span>
-          <span class="skill-chip">TypeScript</span
-          ><span class="skill-chip">PHP</span>
-          <span class="skill-chip">React</span
-          ><span class="skill-chip">Next.js</span>
-          <span class="skill-chip">Node.js</span
-          ><span class="skill-chip">Firebase</span>
+          <span class="skill-chip">C / C++</span>
+          <span class="skill-chip">JavaScript</span>
+          <span class="skill-chip">TypeScript</span>
+          <span class="skill-chip">PHP</span>
+          <span class="skill-chip">React</span>
+          <span class="skill-chip">Next.js</span>
+          <span class="skill-chip">Node.js</span>
+          <span class="skill-chip">Firebase</span>
         </div>
         <div class="skill-group-label">Robotics / Embedded</div>
         <div class="skill-row">
-          <span class="skill-chip">Arduino</span
-          ><span class="skill-chip">Raspberry Pi</span>
+          <span class="skill-chip">Arduino</span>
+          <span class="skill-chip">Raspberry Pi</span>
           <span class="skill-chip">ROS</span>
         </div>
         <div class="page-num r">VII</div>
@@ -384,44 +319,28 @@
     <template id="tpl-l4">
       <div class="page-content">
         <div class="page-tag">Contact</div>
-        <div class="page-h">Let's build<br />something.</div>
-        <p class="page-text">
-          Open to collaborations, internships, and interesting problems. Reach
-          me here:
-        </p>
-        <a class="contact-link" href="mailto:jasmankaur30@gmail.com"
-          ><span>Email</span><span>jasmankaur30@gmail.com</span></a
-        >
-        <a
-          class="contact-link"
-          href="https://linkedin.com/in/jasman05"
-          target="_blank"
-          ><span>LinkedIn</span><span>/in/jasman05</span></a
-        >
-        <a
-          class="contact-link"
-          href="https://www.instagram.com/jasmann_05"
-          target="_blank"
-          ><span>Instagram</span><span>@jasmann_05</span></a
-        >
-        <a
-          class="contact-link"
-          href="https://github.com/jasman5"
-          target="_blank"
-          ><span>GitHub</span><span>@jasman5</span></a
-        >
+        <div class="page-h">Let's build<br/>something.</div>
+        <p class="page-text">Open to collaborations, internships, and interesting problems. Reach me here:</p>
+        <a class="contact-link" href="mailto:jasmankaur30@gmail.com" style="--i:0">
+          <span>Email</span><span>jasmankaur30@gmail.com</span>
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/jasman05" target="_blank" style="--i:1">
+          <span>LinkedIn</span><span>/in/jasman05</span>
+        </a>
+        <a class="contact-link" href="https://www.instagram.com/jasmann_05" target="_blank" style="--i:2">
+          <span>Instagram</span><span>@jasmann_05</span>
+        </a>
+        <a class="contact-link" href="https://github.com/jasman5" target="_blank" style="--i:3">
+          <span>GitHub</span><span>@jasman5</span>
+        </a>
         <div class="page-num l">VIII</div>
       </div>
     </template>
+
     <template id="tpl-r4">
-      <div
-        class="page-content"
-        style="align-items: center; justify-content: center; text-align: center"
-      >
+      <div class="page-content" style="align-items:center;justify-content:center;text-align:center">
         <div class="page-tag">The End</div>
-        <div class="page-h" style="font-size: 22px">
-          Thanks for<br />reading.
-        </div>
+        <div class="page-h" style="font-size:21px">Thanks for<br/>reading.</div>
         <p class="page-text">— back to the cover.</p>
         <div class="page-num r">IX</div>
       </div>
